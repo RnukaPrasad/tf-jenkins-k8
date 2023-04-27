@@ -1,10 +1,9 @@
 pipeline {
     agent any
-
     stages {
         stage('Checkout') {
             steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RnukaPrasad/tf-jenkins-k8.git']]])            
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/aklot07/cicd_trial.git']]])            
 
           }
         }
@@ -15,10 +14,18 @@ pipeline {
             }
         }
         
-        stage ("terraform apply"){
+        stage ("terraform Action") {
             steps {
-                sh ('terraform apply --auto-approve')
+                //echo "Terraform action is --> ${action}"
+                sh ('terraform apply --auto-approve') 
            }
         }
+        stage('Deploying Application to AKS') {
+            steps {
+                withKubeConfig([credentialsId: 'k8s', serverUrl: 'rpdnsprefix-0wjq6xqv.hcp.swedencentral.azmk8s.io']){
+                sh 'kubectl apply -f deployment.yaml'
+                }
+      }
+    }
     }
 }
