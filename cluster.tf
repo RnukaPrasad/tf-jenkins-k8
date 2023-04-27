@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "rsg" {
 
 resource "azurerm_kubernetes_cluster" "KTJ" {
   name                = "KTJ"
-  location            = "East Asia"
+  location            = "Sweden Central"
   resource_group_name = azurerm_resource_group.rsg.name
   dns_prefix          = "akdnsprefix"
   kubernetes_version  = "1.25.6"
