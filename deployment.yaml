@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sbootpod
+  name: sbootpod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sbootpod
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sbootpod
+    spec:
+      containers:
+      - image: 162263/rp:2.0
+        name: sbootpod
+        ports:
+        - containerPort: 8091
+        resources: {}
+status: {}
