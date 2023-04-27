@@ -8,15 +8,16 @@ provider "azurerm" {
   client_secret     = "9307923c-6410-4fbd-b59a-b67d0312860a"
 }
 
-data "azurerm_resource_group" "rsg" {
-  name = "rp-all"
+resource "azurerm_resource_group" "rsg" {
+  name     = "KTJ"
+  location = "Sweden Central"
 }
 
-resource "azurerm_kubernetes_cluster" "rp-all" {
-  name                = "kTJ"
-  location            = "Sweden Central"
-  resource_group_name = data.azurerm_resource_group.rsg.name
-  dns_prefix          = "RPdnsprefix"
+resource "azurerm_kubernetes_cluster" "KTJ" {
+  name                = "KTJ"
+  location            = "East Asia"
+  resource_group_name = azurerm_resource_group.rsg.name
+  dns_prefix          = "akdnsprefix"
   kubernetes_version  = "1.25.6"
 
   default_node_pool {
