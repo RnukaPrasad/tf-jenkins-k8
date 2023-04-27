@@ -19,12 +19,12 @@ pipeline {
                 sh ('terraform apply --auto-approve') 
            }
         }
-        stage('Deploying Application to AKS') {
+       /* stage('Deploying Application to AKS') {
             steps {
                 withKubeConfig([credentialsId: 'k8s', serverUrl: 'https://rpdnsprefix-0wjq6xqv.hcp.swedencentral.azmk8s.io']){
                 sh 'kubectl apply -f deployment.yaml'
                 }
       }
-    }
+    } */
     }
 }
